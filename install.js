@@ -10,7 +10,6 @@ module.exports = {
           GIT_LFS_SKIP_SMUDGE: "1"
         },
         message: [
-          "git lfs install",
           "git clone https://github.com/manat0912/Sam3Video.git app",
         ]
       }
@@ -48,3 +47,4 @@ module.exports = {
     }
   ]
 }
+
