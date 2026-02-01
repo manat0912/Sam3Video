@@ -21,7 +21,7 @@ module.exports = {
         uri: "torch.js",
         params: {
           venv: "env",
-          path: "app",
+          path: "app/app",
           xformers: true,
           triton: true,
           sageattention: true
@@ -32,7 +32,7 @@ module.exports = {
       method: "shell.run",
       params: {
         venv: "env",
-        path: "app",
+        path: "app/app",
         message: [
           "uv pip install gradio devicetorch",
           "uv pip install -r requirements.txt"
@@ -43,8 +43,7 @@ module.exports = {
       method: "shell.run",
       params: {
         message: "python merge_models.py",
-        venv: "env",
-        path: "app"
+        venv: "env"
       }
     }
   ]
