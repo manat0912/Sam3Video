@@ -19,10 +19,10 @@ GIT_CMD = r'"C:\Program Files\Git\cmd\git.exe"'
 
 def main():
     # 1. Soft reset to undo the massive commit but keep files
-    print("Resetting last commit...")
-    # Using full path
-    if not run_command(f"{GIT_CMD} reset --mixed HEAD~1"):
-        print("Reset failed. Maybe no commit to reset? Proceeding anyway check status.")
+    print("Skipping reset to preserve code history...")
+    # NOTE: Reset removed to append model commits instead
+    # if not run_command(f"{GIT_CMD} reset --mixed HEAD~1"):
+    #     print("Reset failed. Maybe no commit to reset? Proceeding anyway check status.")
 
 
     # 2. Get list of files
@@ -47,13 +47,15 @@ def main():
     
     total_batches = (len(part_files) + BATCH_SIZE - 1) // BATCH_SIZE
     
-    for i in range(0, len(part_files), BATCH_SIZE):
+    for i in range(55, len(part_files), BATCH_SIZE):
         batch = part_files[i:i+BATCH_SIZE]
         batch_num = (i // BATCH_SIZE) + 1
         print(f"Processing Batch {batch_num}/{total_batches} ({len(batch)} files)...")
         
         # Git Add
-        add_cmd = f"{GIT_CMD} add {' '.join(batch)}"
+        # Quote filenames to handle spaces/parentheses
+        quoted_batch = [f'"{f}"' for f in batch]
+        add_cmd = f"{GIT_CMD} add {' '.join(quoted_batch)}"
         if not run_command(add_cmd):
             print("Failed to add files")
             exit(1)
@@ -71,7 +73,7 @@ def main():
         for attempt in range(max_retries):
             print(f"Pushing (Attempt {attempt+1}/{max_retries})...")
             # Force push because we reset history
-            if run_command(f"{GIT_CMD} push origin main --force"):
+            if run_command(f"{GIT_CMD} push origin main"):
                 success = True
                 break
             print("Push failed, retrying in 5 seconds...")
@@ -85,7 +87,7 @@ def main():
     print("Processing remaining files...")
     run_command(f"{GIT_CMD} add .") # Add everything else
     run_command(f'{GIT_CMD} commit -m "Update configuration and scripts"')
-    run_command(f"{GIT_CMD} push origin main --force")
+    run_command(f"{GIT_CMD} push origin main")
     
     print("Incremental push complete!")
 

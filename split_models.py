@@ -1,6 +1,6 @@
 import os
 
-def split_file(file_path, chunk_size=95 * 1024 * 1024):  # 95 MB
+def split_file(file_path, chunk_size=45 * 1024 * 1024):  # 45 MB
     if not os.path.exists(file_path):
         print(f"File not found: {file_path}")
         return
@@ -31,7 +31,7 @@ def split_file(file_path, chunk_size=95 * 1024 * 1024):  # 95 MB
 if __name__ == "__main__":
     # Generic recursive scanner for large files
     search_path = "app"
-    chunk_size_mb = 95
+    chunk_size_mb = 45
     limit_bytes = chunk_size_mb * 1024 * 1024
     
     print(f"Scanning {search_path} for files larger than {chunk_size_mb}MB...")
