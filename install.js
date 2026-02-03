@@ -15,6 +15,17 @@ module.exports = {
       }
     },
     {
+     method: "shell.run",
+      params: {
+        env: {
+          GIT_LFS_SKIP_SMUDGE: "1"
+        },
+        message: [
+          "git clone https://github.com/manat0912/SamsModels.git app",
+        ]
+      }
+    },
+    {
       method: "script.start",
       params: {
         uri: "torch.js",
@@ -47,4 +58,5 @@ module.exports = {
     }
   ]
 }
+
 
