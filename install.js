@@ -7,7 +7,6 @@ module.exports = {
       method: "shell.run",
       params: {
         env: {
-          GIT_LFS_SKIP_SMUDGE: "1"
         },
         message: [
           "git clone https://github.com/manat0912/Sam3Video.git app",
@@ -58,5 +57,6 @@ module.exports = {
     }
   ]
 }
+
 
 
