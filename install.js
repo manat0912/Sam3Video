@@ -40,7 +40,7 @@ module.exports = {
         venv: "env",
         path: "app/app",
         message: [
-          "python merge_models.py ../app.py models/sam3"
+          "python merge_models.py"
         ]
       }
     }
