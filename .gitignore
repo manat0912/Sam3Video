@@ -31,3 +31,4 @@ cache/
 app/models/sam3/sam3.pt
 app/models/sam3/model.safetensors
 app/models.zip
+app/
